@@ -24,6 +24,9 @@ private:
     in_addr data_{};
 
 public:
+    /// Address protocol family
+    static constexpr int Family = AF_INET;
+
     /// Represent an address as an array of bytes
     using bytes_type = std::array< std::uint8_t, 4 >;
 

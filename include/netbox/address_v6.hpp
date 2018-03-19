@@ -17,6 +17,9 @@ private:
     unsigned long scopeId_{0};
 
 public:
+    /// Address protocol family
+    static constexpr int Family = AF_INET6;
+
     /// Represent an address as an array of bytes
     using bytes_type = std::array< std::uint8_t, 16 >;
 
@@ -24,7 +27,7 @@ public:
     constexpr AddressV6() = default;
 
     /// Construct an address from raw bytes and scope ID
-    constexpr AddressV6(const bytes_type& bytes, unsigned long scopeId)
+    constexpr AddressV6(const bytes_type& bytes, unsigned long scopeId = 0)
         : scopeId_{scopeId}
     {
         std::memcpy(data_.s6_addr, bytes.data(), bytes.size());

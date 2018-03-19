@@ -28,17 +28,14 @@ int main(int argc, char* argv[])
 
         std::cout << toString(bindAddress) << '\n';
 
+        Endpoint bindEndpoint{bindAddress, std::uint16_t(port)};
+
         auto socket = Socket::create(AF_INET, SOCK_STREAM, 0);
         if (auto result = setOption(socket, Options::Socket::ReuseAddr{true}); !result) {
             std::cout << "Can't set option ReuseAddr (" << result.str() << ")\n";
         }
 
-        sockaddr_in addr{};
-        addr.sin_family = AF_INET;
-        addr.sin_port = hostToNetwork16(port);
-        addr.sin_addr.s_addr = hostToNetwork32(bindAddress.toUint());
-
-        if (auto result = bind(socket, reinterpret_cast< sockaddr* >(&addr), sizeof(addr)); !result) {
+        if (auto result = bind(socket, bindEndpoint); !result) {
             std::cout << "Can't bind socket (" << result.str() << ")\n";
         }
 

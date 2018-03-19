@@ -5,9 +5,8 @@
 #ifndef KSERGEY_socket_ops_170318232155
 #define KSERGEY_socket_ops_170318232155
 
-#include "address_v4.hpp"
-#include "address_v6.hpp"
 #include "buffer.hpp"
+#include "endpoint.hpp"
 #include "result.hpp"
 #include "socket.hpp"
 
@@ -19,10 +18,22 @@ inline OpResult connect(Socket& socket, const sockaddr* addr, socklen_t addrlen)
     return ::connect(socket.native(), addr, addrlen);
 }
 
+/// @overload
+inline OpResult connect(Socket& socket, const Endpoint& endpoint) noexcept
+{
+    return connect(socket, endpoint.data(), endpoint.size());
+}
+
 /// Bind socket
 inline OpResult bind(Socket& socket, const sockaddr* addr, socklen_t addrlen) noexcept
 {
     return ::bind(socket.native(), addr, addrlen);
+}
+
+/// @overload
+inline OpResult bind(Socket& socket, const Endpoint& endpoint) noexcept
+{
+    return bind(socket, endpoint.data(), endpoint.size());
 }
 
 /// @overload
@@ -45,6 +56,13 @@ inline OpResult listen(Socket& socket, int backlog = 10) noexcept
 inline AcceptResult accept(Socket& socket, sockaddr* addr = nullptr, socklen_t* addrlen = nullptr) noexcept
 {
     return ::accept(socket.native(), addr, addrlen);
+}
+
+/// #overload
+inline AcceptResult accept(Socket& socket, Endpoint& endpoint) noexcept
+{
+    socklen_t len;
+    return accept(socket, endpoint.data(), &len);
 }
 
 /// Send data into socket
