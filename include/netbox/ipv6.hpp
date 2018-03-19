@@ -7,7 +7,6 @@
 
 #include "details/ipv6/address.hpp"
 #include "details/ipv6/endpoint.hpp"
-#include "exception.hpp"
 
 namespace netbox {
 

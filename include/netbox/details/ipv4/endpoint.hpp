@@ -6,6 +6,7 @@
 #define KSERGEY_endpoint_190318231433
 
 #include "address.hpp"
+#include "../../exception.hpp"
 
 namespace netbox::details::ipv4 {
 
@@ -72,6 +73,14 @@ public:
     constexpr socklen_t size() const noexcept
     {
         return sizeof(sockaddr_in);
+    }
+
+    /// Check size match
+    constexpr void resize(socklen_t size)
+    {
+        if (size != sizeof(sockaddr_in)) {
+            throwEx< AddressError >("IPv4 resize");
+        }
     }
 };
 

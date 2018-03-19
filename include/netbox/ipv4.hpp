@@ -7,7 +7,6 @@
 
 #include "details/ipv4/address.hpp"
 #include "details/ipv4/endpoint.hpp"
-#include "exception.hpp"
 
 namespace netbox {
 
