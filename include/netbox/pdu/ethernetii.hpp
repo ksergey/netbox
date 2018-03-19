@@ -93,7 +93,7 @@ inline constexpr EthernetII::Address EthernetII::source() const noexcept
 
 inline constexpr auto EthernetII::protocol() const noexcept
 {
-    return ntohs(header_->h_proto);
+    return netbox::ntohs(header_->h_proto);
 }
 
 inline constexpr const void* EthernetII::payload() const noexcept

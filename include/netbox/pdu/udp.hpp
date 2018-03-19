@@ -74,22 +74,22 @@ inline constexpr UDP::operator bool() const noexcept
 
 inline constexpr std::uint16_t UDP::source() const noexcept
 {
-    return ntohs(header_->source);
+    return netbox::ntohs(header_->source);
 }
 
 inline constexpr std::uint16_t UDP::destination() const noexcept
 {
-    return ntohs(header_->dest);
+    return netbox::ntohs(header_->dest);
 }
 
 inline constexpr std::uint16_t UDP::length() const noexcept
 {
-    return ntohs(header_->len);
+    return netbox::ntohs(header_->len);
 }
 
 inline constexpr std::uint16_t UDP::checksum() const noexcept
 {
-    return ntohs(header_->check);
+    return netbox::ntohs(header_->check);
 }
 
 inline constexpr const void* UDP::payload() const noexcept

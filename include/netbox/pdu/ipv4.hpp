@@ -98,17 +98,17 @@ inline constexpr auto IPv4::ttl() const noexcept
 
 inline constexpr auto IPv4::checksum() const noexcept
 {
-    return ntohs(header_->check);
+    return netbox::ntohs(header_->check);
 }
 
 inline constexpr IPv4::Address IPv4::source() const noexcept
 {
-    return Address{ntohl(header_->saddr)};
+    return Address{netbox::ntohl(header_->saddr)};
 }
 
 inline constexpr IPv4::Address IPv4::destination() const noexcept
 {
-    return Address{ntohl(header_->daddr)};
+    return Address{netbox::ntohl(header_->daddr)};
 }
 
 inline constexpr auto IPv4::version() const noexcept

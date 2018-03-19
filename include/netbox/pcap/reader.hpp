@@ -155,8 +155,8 @@ inline void Reader::readFileHeader()
             scale_ = PassThrough;
             break;
 
-        case htonl(TCPDumpMagic):
-        case htonl(NSecTCPDumpMagic):
+        case netbox::htonl(TCPDumpMagic):
+        case netbox::htonl(NSecTCPDumpMagic):
             return (file_ = {}), debug("<WARN> Byte swapped PCAP not support");
 
         default:
