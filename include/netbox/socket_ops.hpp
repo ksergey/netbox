@@ -6,13 +6,11 @@
 #define KSERGEY_socket_ops_170318232155
 
 #include "buffer.hpp"
-#include "endpoint.hpp"
-#include "result.hpp"
-#include "socket.hpp"
-
+#include "concepts.hpp"
 #include "ipv4.hpp"
 #include "ipv6.hpp"
-#include "concepts.hpp"
+#include "result.hpp"
+#include "socket.hpp"
 
 namespace netbox {
 
@@ -26,7 +24,11 @@ inline OpResult connect(Socket& socket, const sockaddr* addr, socklen_t addrlen)
 template< class Endpoint >
 inline OpResult connect(Socket& socket, const Endpoint& endpoint) noexcept
 {
-    static_assert( isEndpoint< Endpoint >(), "Not an endpoint like" );
+    static_assert( std::is_same< DataResultType< const Endpoint >, const sockaddr* >(),
+           "Endpoint not meet requirements" );
+    static_assert( std::is_same< SizeResultType< const Endpoint >, socklen_t >(),
+           "Endpoint not meet requirements" );
+
     return connect(socket, endpoint.data(), endpoint.size());
 }
 
@@ -40,7 +42,10 @@ inline OpResult bind(Socket& socket, const sockaddr* addr, socklen_t addrlen) no
 template< class Endpoint >
 inline OpResult bind(Socket& socket, const Endpoint& endpoint) noexcept
 {
-    static_assert( isEndpoint< Endpoint >(), "Not an endpoint like" );
+    static_assert( std::is_same< DataResultType< const Endpoint >, const sockaddr* >(),
+           "Endpoint not meet requirements" );
+    static_assert( std::is_same< SizeResultType< const Endpoint >, socklen_t >(),
+           "Endpoint not meet requirements" );
     return bind(socket, endpoint.data(), endpoint.size());
 }
 
@@ -48,6 +53,12 @@ inline OpResult bind(Socket& socket, const Endpoint& endpoint) noexcept
 inline OpResult bind(Socket& socket, std::uint16_t port, const IPv4::Address& address = IPv4::Address::any()) noexcept
 {
     return bind(socket, IPv4::Endpoint{address, port});
+}
+
+/// @overload
+inline OpResult bind(Socket& socket, std::uint16_t port, const IPv6::Address& address = IPv6::Address::any()) noexcept
+{
+    return bind(socket, IPv6::Endpoint{address, port});
 }
 
 /// Place socket in a listen state
@@ -63,10 +74,20 @@ inline AcceptResult accept(Socket& socket, sockaddr* addr = nullptr, socklen_t* 
 }
 
 /// #overload
+template< class Endpoint >
 inline AcceptResult accept(Socket& socket, Endpoint& endpoint) noexcept
 {
+    static_assert( std::is_same< DataResultType< Endpoint >, sockaddr* >(),
+           "Endpoint not meet requirements" );
+    static_assert( std::is_same< SizeResultType< Endpoint >, socklen_t >(),
+           "Endpoint not meet requirements" );
+    static_assert( HasMemberResize< Endpoint >(),
+           "Endpoint not meet requirements" );
+
     socklen_t len;
-    return accept(socket, endpoint.data(), &len);
+    auto result = accept(socket, endpoint.data(), &len);
+    endpoint.resize(len);
+    return result;
 }
 
 /// Send data into socket

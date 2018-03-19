@@ -7,8 +7,7 @@
 
 #include <linux/ip.h>
 #include <cstdint>
-#include "../address_v4.hpp"
-#include "../exception.hpp"
+#include "../ipv4.hpp"
 
 namespace netbox::pdu {
 
@@ -24,7 +23,7 @@ private:
 
 public:
     /// Address type
-    using Address = AddressV4;
+    using Address = netbox::IPv4::Address;
 
     /// Construct undefined IP PDU
     constexpr IPv4() = default;

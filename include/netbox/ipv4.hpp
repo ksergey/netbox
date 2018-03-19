@@ -21,7 +21,7 @@ struct IPv4
 
     /// Create an IPv4 address from an IP address string in dotted decimal form
     /// @throw AddressError if `inet_pton` failed
-    Address addressFromString(const char* str);
+    static Address addressFromString(const char* str);
 
     // TODO: endpointFromString
 };

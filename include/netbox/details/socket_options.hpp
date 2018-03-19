@@ -10,8 +10,8 @@
 #include <linux/net_tstamp.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
-#include "../address_v4.hpp"
-#include "../address_v6.hpp"
+#include "../ipv4.hpp"
+#include "../ipv6.hpp"
 
 namespace netbox {
 namespace details {
@@ -132,8 +132,8 @@ public:
     constexpr MulticastRequestOption() = default;
 
     /// Construct IPv4 request
-    constexpr MulticastRequestOption(const AddressV4& multicastAddress,
-            const AddressV4& networkInterface = AddressV4::any())
+    constexpr MulticastRequestOption(const IPv4::Address& multicastAddress,
+            const IPv4::Address& networkInterface = IPv4::Address::any())
         : family_{PF_INET}
     {
         v4_.imr_multiaddr.s_addr = hostToNetwork32(multicastAddress.toUint());
@@ -141,7 +141,7 @@ public:
     }
 
     /// Construct IPv6 request
-    constexpr MulticastRequestOption(const AddressV6& multicastAddress,
+    constexpr MulticastRequestOption(const IPv6::Address& multicastAddress,
             unsigned long networkInterface = 0)
         : family_{PF_INET6}
     {
@@ -197,9 +197,9 @@ public:
     constexpr MulticastSourceRequestOption() = default;
 
     /// Construct IPv4 request
-    constexpr MulticastSourceRequestOption(const AddressV4& multicastAddress,
-            const AddressV4& multicastSourceAddress,
-            const AddressV4& networkInterface = AddressV4::any())
+    constexpr MulticastSourceRequestOption(const IPv4::Address& multicastAddress,
+            const IPv4::Address& multicastSourceAddress,
+            const IPv4::Address& networkInterface = IPv4::Address::any())
     {
         value_.imr_multiaddr.s_addr = hostToNetwork32(multicastAddress.toUint());
         value_.imr_interface.s_addr = hostToNetwork32(networkInterface.toUint());

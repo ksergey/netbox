@@ -21,7 +21,7 @@ struct IPv6
 
     /// Create an IPv6 address from a string
     /// @throw AddressError if `inet_pton` failed
-    Address addressFromString(const char* str);
+    static Address addressFromString(const char* str);
 };
 
 inline IPv6::Address IPv6::addressFromString(const char* str)

@@ -22,20 +22,20 @@ int main(int argc, char* argv[])
             throwEx< std::runtime_error >("Port out of range");
         }
 
-        AddressV4 bindAddress = (argc > 2)
-            ? makeAddresV4(argv[2])
-            : AddressV4::any();
+        IPv4::Address address = (argc > 2)
+            ? IPv4::addressFromString(argv[2])
+            : IPv4::Address::any();
 
-        std::cout << toString(bindAddress) << '\n';
+        std::cout << toString(address) << '\n';
 
-        Endpoint bindEndpoint{bindAddress, std::uint16_t(port)};
+        IPv4::Endpoint endpoint{address, std::uint16_t(port)};
 
         auto socket = Socket::create(AF_INET, SOCK_STREAM, 0);
         if (auto result = setOption(socket, Options::Socket::ReuseAddr{true}); !result) {
             std::cout << "Can't set option ReuseAddr (" << result.str() << ")\n";
         }
 
-        if (auto result = bind(socket, bindEndpoint); !result) {
+        if (auto result = bind(socket, endpoint); !result) {
             std::cout << "Can't bind socket (" << result.str() << ")\n";
         }
 
@@ -43,9 +43,10 @@ int main(int argc, char* argv[])
             std::cout << "Can't listen (" << result.str() << ")\n";
         }
 
-        auto result = accept(socket);
+        IPv4::Endpoint client;
+        auto result = accept(socket, client);
         if (result) {
-            std::cout << "Connection accept\n";
+            std::cout << "Connection accept (" << toString(client.address()) << ':' << client.port() << ")\n";
         } else {
             std::cout << "Error: " << result.str() << '\n';
         }

@@ -49,8 +49,8 @@ void printPacket(const auto& packet)
         }
 
         std::cout
-            << "    src: " << toString(ipv4.source()) << '\n'
-            << "    dst: " << toString(ipv4.destination()) << '\n'
+            << "    src: " << netbox::toString(ipv4.source()) << '\n'
+            << "    dst: " << netbox::toString(ipv4.destination()) << '\n'
             << "    checksum: " << ipv4.checksum() << '\n'
             << "    ttl: " << int(ipv4.ttl()) << '\n'
             << "    protocol: " << int(ipv4.protocol()) << '\n';

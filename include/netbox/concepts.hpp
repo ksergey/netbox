@@ -10,31 +10,20 @@
 
 namespace netbox {
 
-/// Checks if T has members data() and size()
+template< class T >
+using DataResultType = decltype(std::declval< T& >().data());
+
+template< class T >
+using SizeResultType = decltype(std::declval< T& >().size());
+
 template< class T, class = std::void_t<> >
-struct HasDataAndSize
+struct HasMemberResize
     : std::false_type
 {};
-
-/// @overload
 template< class T >
-struct HasDataAndSize< T,
-    std::void_t<
-        decltype(std::declval< T& >().data()),
-        decltype(std::declval< T& >().size())
-    >
->
+struct HasMemberResize< T, std::void_t< decltype(std::declval< T& >().resize(std::declval< socklen_t >())) > >
     : std::true_type
 {};
-
-/// Return true if `T` is looks like an endpoint
-template< class T >
-constexpr bool isEndpoint() noexcept
-{
-    return HasDataAndSize< T >()
-        && std::is_same< const sockaddr*, decltype(std::declval< const T& >().data()) >()
-        && std::is_same< socklen_t, decltype(std::declval< const T& >().size()) >();
-}
 
 } /* namespace netbox */
 
