@@ -12,13 +12,13 @@
 #include "../exception.hpp"
 #include "string.hpp"
 
-#if defined( OVERKILL_PCAP_GZIP )
+#if defined( netbox_PCAP_GZIP )
 #   include "gzip_decompress_stream.hpp"
-#endif // defined( OVERKILL_PCAP_GZIP )
+#endif // defined( netbox_PCAP_GZIP )
 
-#if defined( OVERKILL_PCAP_LZMA )
+#if defined( netbox_PCAP_LZMA )
 #   include "lzma_decompress_stream.hpp"
-#endif // defined( OVERKILL_PCAP_LZMA )
+#endif // defined( netbox_PCAP_LZMA )
 
 namespace netbox::utils {
 
@@ -60,17 +60,17 @@ public:
         fileStream_.open(filename, std::ios::in | std::ios::binary);
         if (fileStream_) {
             if (endsWith(filename, ".xz")) {
-#if defined( OVERKILL_PCAP_LZMA )
+#if defined( netbox_PCAP_LZMA )
                 stream_ = new LZMADecompressStream(fileStream_);
-#else // defined( OVERKILL_PCAP_LZMA )
+#else // defined( netbox_PCAP_LZMA )
                 throwEx< std::runtime_error >("LZMA not supported");
-#endif // defined( OVERKILL_PCAP_LZMA )
+#endif // defined( netbox_PCAP_LZMA )
             } else if (endsWith(filename, ".gz")) {
-#if defined( OVERKILL_PCAP_GZIP )
+#if defined( netbox_PCAP_GZIP )
                 stream_ = new GZipDecompressStream(fileStream_);
-#else // defined( OVERKILL_PCAP_GZIP )
+#else // defined( netbox_PCAP_GZIP )
                 throwEx< std::runtime_error >("GZip not supported");
-#endif // defined( OVERKILL_PCAP_GZIP )
+#endif // defined( netbox_PCAP_GZIP )
             } else {
                 stream_ = &fileStream_;
             }

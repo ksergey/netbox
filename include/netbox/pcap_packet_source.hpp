@@ -67,7 +67,7 @@ inline void PcapPacketSource::addFile(const char* filename)
 template< class Callback >
 bool PcapPacketSource::process(Callback&& callback)
 {
-    if (OVERKILL_UNLIKELY(isDone())) {
+    if (NETBOX_UNLIKELY(isDone())) {
         if (doneCallback_) {
             doneCallback_();
         }
@@ -75,10 +75,13 @@ bool PcapPacketSource::process(Callback&& callback)
     }
 
     auto& [packet, reader] = queue_.begin()->second;
+    if (NETBOX_LIKELY(packet)) {
+        callback(packet);
+    }
+    queue_.erase(queue_.begin());
+    appendQueue(reader);
 
-    // TODO: implement me
-
-    return false;
+    return true;
 }
 
 template< class Callback >
@@ -90,7 +93,7 @@ void PcapPacketSource::setDoneCallback(Callback&& callback)
 inline void PcapPacketSource::appendQueue(Reader& reader)
 {
     Packet packet = reader.readPacket();
-    if (OVERKILL_LIKELY(packet)) {
+    if (NETBOX_LIKELY(packet)) {
         std::uint64_t timestamp = packet.timestamp().tv_sec * std::uint64_t(1000000000ul)
             + packet.timestamp().tv_nsec;
 

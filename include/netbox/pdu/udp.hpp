@@ -62,7 +62,7 @@ inline constexpr UDP::UDP(const void* buffer, std::uint32_t size)
     : header_{static_cast< const header_type* >(buffer)}
     , size_{size}
 {
-    if (OVERKILL_UNLIKELY(size < HeaderSize)) {
+    if (NETBOX_UNLIKELY(size < HeaderSize)) {
         throwEx< PDUError >("Not enought data for UDP PDU");
     }
 }

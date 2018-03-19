@@ -74,7 +74,7 @@ inline Socket::Socket(Socket&& other) noexcept
 
 inline Socket& Socket::operator=(Socket&& other) noexcept
 {
-    if (OVERKILL_LIKELY(this != &other)) {
+    if (NETBOX_LIKELY(this != &other)) {
         swap(other);
     }
     return *this;

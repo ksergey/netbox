@@ -5,12 +5,12 @@
 #ifndef KSERGEY_compiler_140318105608
 #define KSERGEY_compiler_140318105608
 
-#ifndef OVERKILL_LIKELY
-#   define OVERKILL_LIKELY(x) __builtin_expect(static_cast< bool >(x), true)
+#ifndef NETBOX_LIKELY
+#   define NETBOX_LIKELY(x) __builtin_expect(static_cast< bool >(x), true)
 #endif
 
-#ifndef OVERKILL_UNLIKELY
-#   define OVERKILL_UNLIKELY(x) __builtin_expect(static_cast< bool >(x), false)
+#ifndef NETBOX_UNLIKELY
+#   define NETBOX_UNLIKELY(x) __builtin_expect(static_cast< bool >(x), false)
 #endif
 
 #endif /* KSERGEY_compiler_140318105608 */

@@ -24,7 +24,7 @@ inline OpResult getOption(Socket& socket, Option& option) noexcept
 {
     socklen_t size = option.size();
     OpResult result = getsockopt(socket.native(), option.level(), option.name(), option.data(), &size);
-    if (OVERKILL_LIKELY(result)) {
+    if (NETBOX_LIKELY(result)) {
         option.resize(size);
     }
     return result;
