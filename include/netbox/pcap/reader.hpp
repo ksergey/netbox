@@ -7,6 +7,7 @@
 
 #include <cstdio>
 #include <vector>
+#include <utility>
 #include "../byte_order.hpp"
 #include "../debug.hpp"
 #include "../utils/file_reader.hpp"
@@ -133,8 +134,10 @@ inline Packet Reader::readPacket()
 
 inline void Reader::swap(Reader& other) noexcept
 {
-    using namespace std;
     file_.swap(other.file_);
+    std::swap(scale_, other.scale_);
+    std::swap(timezone_, other.timezone_);
+    std::swap(buffer_, other.buffer_);
 }
 
 inline void Reader::readFileHeader()
