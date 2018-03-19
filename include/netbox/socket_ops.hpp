@@ -10,6 +10,10 @@
 #include "result.hpp"
 #include "socket.hpp"
 
+#include "ipv4.hpp"
+#include "ipv6.hpp"
+#include "concepts.hpp"
+
 namespace netbox {
 
 /// Establish connection
@@ -19,8 +23,10 @@ inline OpResult connect(Socket& socket, const sockaddr* addr, socklen_t addrlen)
 }
 
 /// @overload
+template< class Endpoint >
 inline OpResult connect(Socket& socket, const Endpoint& endpoint) noexcept
 {
+    static_assert( isEndpoint< Endpoint >(), "Not an endpoint like" );
     return connect(socket, endpoint.data(), endpoint.size());
 }
 
@@ -31,19 +37,17 @@ inline OpResult bind(Socket& socket, const sockaddr* addr, socklen_t addrlen) no
 }
 
 /// @overload
+template< class Endpoint >
 inline OpResult bind(Socket& socket, const Endpoint& endpoint) noexcept
 {
+    static_assert( isEndpoint< Endpoint >(), "Not an endpoint like" );
     return bind(socket, endpoint.data(), endpoint.size());
 }
 
 /// @overload
-inline OpResult bind(Socket& socket, std::uint16_t port, const AddressV4& addr) noexcept
+inline OpResult bind(Socket& socket, std::uint16_t port, const IPv4::Address& address = IPv4::Address::any()) noexcept
 {
-    sockaddr_in bind_addr{};
-    bind_addr.sin_family = AF_INET;
-    bind_addr.sin_addr.s_addr = addr.toUint();
-    bind_addr.sin_port = hostToNetwork16(port);
-    return bind(socket, reinterpret_cast< sockaddr* >(&bind_addr), sizeof(bind_addr));
+    return bind(socket, IPv4::Endpoint{address, port});
 }
 
 /// Place socket in a listen state
