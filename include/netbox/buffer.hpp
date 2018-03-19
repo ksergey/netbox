@@ -7,7 +7,7 @@
 
 #include <cstddef>
 
-namespace NetBox {
+namespace netbox {
 
 class MutableBuffer;
 class ConstBuffer;
@@ -28,8 +28,8 @@ private:
     void* data_{nullptr};
     std::size_t size_{0};
 
-    friend constexpr void* NetBox::details::bufferCastHelper(const MutableBuffer& v) noexcept;
-    friend constexpr std::size_t NetBox::details::bufferSizeHelper(const MutableBuffer& v) noexcept;
+    friend constexpr void* netbox::details::bufferCastHelper(const MutableBuffer& v) noexcept;
+    friend constexpr std::size_t netbox::details::bufferSizeHelper(const MutableBuffer& v) noexcept;
 
 public:
     /// Construct an empty buffer
@@ -49,8 +49,8 @@ private:
     const void* data_{nullptr};
     std::size_t size_{0};
 
-    friend constexpr const void* NetBox::details::bufferCastHelper(const ConstBuffer& v) noexcept;
-    friend constexpr std::size_t NetBox::details::bufferSizeHelper(const ConstBuffer& v) noexcept;
+    friend constexpr const void* netbox::details::bufferCastHelper(const ConstBuffer& v) noexcept;
+    friend constexpr std::size_t netbox::details::bufferSizeHelper(const ConstBuffer& v) noexcept;
 
 public:
     /// Construct an empty buffer
@@ -104,6 +104,6 @@ inline constexpr std::size_t bufferSizeHelper(const ConstBuffer& v) noexcept
 }
 
 } /* namespace details */
-} /* namespace NetBox */
+} /* namespace netbox */
 
 #endif /* KSERGEY_buffer_190318010659 */

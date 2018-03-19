@@ -10,7 +10,7 @@
 #include <vector>
 #include "pcap/reader.hpp"
 
-namespace NetBox {
+namespace netbox {
 
 /// IP packets source
 class PcapPacketSource
@@ -99,6 +99,6 @@ inline void PcapPacketSource::appendQueue(Reader& reader)
     }
 }
 
-} /* namespace NetBox */
+} /* namespace netbox */
 
 #endif /* KSERGEY_pcap_packet_source_160318115317 */

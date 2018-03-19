@@ -7,7 +7,7 @@
 
 #include <cstdint>
 
-namespace NetBox {
+namespace netbox {
 
 #if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
 
@@ -45,6 +45,6 @@ constexpr std::uint16_t ntohs(std::uint16_t data) noexcept
     return htons(data);
 }
 
-} /* namespace NetBox */
+} /* namespace netbox */
 
 #endif /* KSERGEY_byte_order_140318234029 */

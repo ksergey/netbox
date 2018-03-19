@@ -11,7 +11,7 @@
 #include "result.hpp"
 #include "socket.hpp"
 
-namespace NetBox {
+namespace netbox {
 
 /// Establish connection
 inline OpResult connect(Socket& socket, const sockaddr* addr, socklen_t addrlen) noexcept
@@ -116,6 +116,6 @@ inline TransmitResult recvmmsg(Socket& socket, mmsghdr* msgvec, unsigned int vle
     return ::recvmmsg(socket.native(), msgvec, vlen, 0, timeout);
 }
 
-} /* namespace NetBox */
+} /* namespace netbox */
 
 #endif /* KSERGEY_socket_ops_170318232155 */

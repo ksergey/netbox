@@ -10,7 +10,7 @@
 #include <streambuf>
 #include <zlib.h>
 
-namespace NetBox::utils {
+namespace netbox::utils {
 namespace details {
 
 /// The GZip streambuffer that decompresses data
@@ -134,6 +134,6 @@ public:
     {}
 };
 
-} /* namespace NetBox::utils */
+} /* namespace netbox::utils */
 
 #endif /* KSERGEY_gz_decompress_stream_300117184757 */

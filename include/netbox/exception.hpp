@@ -13,7 +13,7 @@
 #include "compiler.hpp"
 #include "error_code.hpp"
 
-namespace NetBox {
+namespace netbox {
 
 /// Socket creation error exception
 struct SocketError
@@ -68,6 +68,6 @@ template< class Ex >
     throwEx< Ex >(text.c_str());
 }
 
-} /* namespace NetBox */
+} /* namespace netbox */
 
 #endif /* KSERGEY_exception_140318110652 */

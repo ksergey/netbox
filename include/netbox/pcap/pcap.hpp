@@ -9,7 +9,7 @@
 #include <cstdint>
 #include "../compiler.hpp"
 
-namespace NetBox::pcap {
+namespace netbox::pcap {
 
 static constexpr std::uint32_t MaxSnapLen = 65535;
 
@@ -47,6 +47,6 @@ struct PacketHeader {
 	std::uint32_t len;      // length this packet (off wire)
 };
 
-} /* namespace NetBox::pcap */
+} /* namespace netbox::pcap */
 
 #endif /* KSERGEY_pcap_150318120952 */

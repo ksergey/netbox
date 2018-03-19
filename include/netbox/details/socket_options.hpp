@@ -13,7 +13,7 @@
 #include "../address_v4.hpp"
 #include "../address_v6.hpp"
 
-namespace NetBox {
+namespace netbox {
 namespace details {
 
 /// Socket option boolean type
@@ -265,6 +265,6 @@ public:
 };
 
 } /* namespace details */
-} /* namespace NetBox */
+} /* namespace netbox */
 
 #endif /* KSERGEY_socket_options_140318140036 */

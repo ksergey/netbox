@@ -4,11 +4,11 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <NetBox/socket_ops.hpp>
-#include <NetBox/socket_ops.hpp>
-#include <NetBox/socket_options.hpp>
+#include <netbox/socket_ops.hpp>
+#include <netbox/socket_ops.hpp>
+#include <netbox/socket_options.hpp>
 
-using namespace NetBox;
+using namespace netbox;
 
 int main(int argc, char* argv[])
 {
@@ -36,8 +36,8 @@ int main(int argc, char* argv[])
 
         sockaddr_in addr{};
         addr.sin_family = AF_INET;
-        addr.sin_port = NetBox::htons(port);
-        addr.sin_addr.s_addr = NetBox::htonl(bindAddress.toUint());
+        addr.sin_port = netbox::htons(port);
+        addr.sin_addr.s_addr = netbox::htonl(bindAddress.toUint());
 
         if (auto result = bind(socket, reinterpret_cast< sockaddr* >(&addr), sizeof(addr)); !result) {
             std::cout << "Can't bind socket (" << result.str() << ")\n";

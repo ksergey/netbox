@@ -5,15 +5,15 @@
 #include <unistd.h>
 #include <iostream>
 #include <cmath>
-#include <NetBox/socket.hpp>
-#include <NetBox/socket_options.hpp>
+#include <netbox/socket.hpp>
+#include <netbox/socket_options.hpp>
 
-using namespace NetBox;
+using namespace netbox;
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] char* argv[])
 {
     try {
-        auto socket = Socket::create(AF_PACKET, SOCK_DGRAM, NetBox::htons(ETH_P_IP));
+        auto socket = Socket::create(AF_PACKET, SOCK_DGRAM, netbox::htons(ETH_P_IP));
 
         auto result = setOption(socket, Options::Packet::Timestamp{SOF_TIMESTAMPING_RAW_HARDWARE | SOF_TIMESTAMPING_RX_HARDWARE});
         if (!result) {

@@ -9,7 +9,7 @@
 #include "socket.hpp"
 #include "details/socket_options.hpp"
 
-namespace NetBox {
+namespace netbox {
 
 /// Set socket option
 template< class Option >
@@ -78,6 +78,6 @@ struct Options
     };
 };
 
-} /* namespace NetBox */
+} /* namespace netbox */
 
 #endif /* KSERGEY_socket_options_140318140837 */

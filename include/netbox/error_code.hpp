@@ -8,7 +8,7 @@
 #include <cerrno>
 #include <cstring>
 
-namespace NetBox {
+namespace netbox {
 
 /// Errno helper
 class ErrorCode
@@ -50,6 +50,6 @@ public:
     }
 };
 
-} /* namespace NetBox */
+} /* namespace netbox */
 
 #endif /* KSERGEY_error_code_140318123816 */

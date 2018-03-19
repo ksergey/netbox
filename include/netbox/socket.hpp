@@ -13,7 +13,7 @@
 #include "compiler.hpp"
 #include "exception.hpp"
 
-namespace NetBox {
+namespace netbox {
 
 /// Invalid file descriptor
 static constexpr int BadFd = -1;
@@ -151,6 +151,6 @@ inline Socket Socket::create(int family, int sockType, int protocol) throw()
     return {sock};
 }
 
-} /* namespace NetBox */
+} /* namespace netbox */
 
 #endif /* KSERGEY_socket_140318103443 */

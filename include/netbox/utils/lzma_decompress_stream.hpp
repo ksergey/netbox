@@ -12,7 +12,7 @@
 #include <lzma.h>
 #include "../exception.hpp"
 
-namespace NetBox::utils {
+namespace netbox::utils {
 namespace details {
 
 /// The XZ (LZMA) streambuffer that decompresses data
@@ -159,6 +159,6 @@ public:
     {}
 };
 
-} /* namespace NetBox::utils */
+} /* namespace netbox::utils */
 
 #endif /* KSERGEY_xz_decompress_stream_230117103258 */

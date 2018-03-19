@@ -8,7 +8,7 @@
 #include "error_code.hpp"
 #include "socket.hpp"
 
-namespace NetBox {
+namespace netbox {
 
 /// Hold result of socket operation (i.e. setsockopt, listen, etc...)
 class OpResult
@@ -102,6 +102,6 @@ public:
     }
 };
 
-} /* namespace NetBox */
+} /* namespace netbox */
 
 #endif /* KSERGEY_result_140318120000 */

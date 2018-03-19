@@ -7,7 +7,7 @@
 
 #include "buffer.hpp"
 
-namespace NetBox {
+namespace netbox {
 
 /// Consuming only buffer
 class ConsumingBuffer
@@ -52,6 +52,6 @@ public:
     }
 };
 
-} /* namespace NetBox */
+} /* namespace netbox */
 
 #endif /* KSERGEY_consuming_buffer_190318013249 */

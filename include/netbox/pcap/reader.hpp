@@ -12,7 +12,7 @@
 #include "../utils/file_reader.hpp"
 #include "packet.hpp"
 
-namespace NetBox::pcap {
+namespace netbox::pcap {
 
 /// Single file PCAP file reader
 class Reader
@@ -185,6 +185,6 @@ inline void Reader::readFileHeader()
     buffer_.resize(header.snaplen);
 }
 
-} /* namespace NetBox::pcap */
+} /* namespace netbox::pcap */
 
 #endif /* KSERGEY_reader_160318101433 */

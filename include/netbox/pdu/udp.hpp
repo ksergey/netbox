@@ -8,7 +8,7 @@
 #include <linux/udp.h>
 #include <cstdint>
 
-namespace NetBox::pdu {
+namespace netbox::pdu {
 
 /// UDP protocol data unit (PDU)
 class UDP
@@ -102,6 +102,6 @@ inline constexpr std::uint32_t UDP::payloadSize() const noexcept
     return size_ - HeaderSize;
 }
 
-} /* namespace NetBox::pdu */
+} /* namespace netbox::pdu */
 
 #endif /* KSERGEY_udp_160318174344 */

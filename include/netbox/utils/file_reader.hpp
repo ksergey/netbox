@@ -20,7 +20,7 @@
 #   include "lzma_decompress_stream.hpp"
 #endif // defined( OVERKILL_PCAP_LZMA )
 
-namespace NetBox::utils {
+namespace netbox::utils {
 
 /// File reader
 /// Could open gzip or lzma encoded files
@@ -145,6 +145,6 @@ public:
     }
 };
 
-} /* namespace NetBox::utils */
+} /* namespace netbox::utils */
 
 #endif /* KSERGEY_file_reader_160318100835 */

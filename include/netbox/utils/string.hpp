@@ -8,7 +8,7 @@
 #include <algorithm>
 #include <string_view>
 
-namespace NetBox::utils {
+namespace netbox::utils {
 
 /// @return True if `haystack` ends with `needle`
 inline bool endsWith(std::string_view haystack, std::string_view needle) noexcept
@@ -19,6 +19,6 @@ inline bool endsWith(std::string_view haystack, std::string_view needle) noexcep
     return std::equal(needle.rbegin(), needle.rend(), haystack.rbegin());
 }
 
-} /* namespace NetBox::utils */
+} /* namespace netbox::utils */
 
 #endif /* KSERGEY_string_150318154356 */

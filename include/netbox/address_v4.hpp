@@ -15,7 +15,7 @@
 #include "byte_order.hpp"
 #include "exception.hpp"
 
-namespace NetBox {
+namespace netbox {
 
 /// IPv4 address
 class AddressV4
@@ -130,6 +130,6 @@ inline AddressV4 makeAddresV4(const char* str)
     return {bytes};
 }
 
-} /* namespace NetBox */
+} /* namespace netbox */
 
 #endif /* KSERGEY_address_v4_140318224644 */

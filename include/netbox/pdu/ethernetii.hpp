@@ -14,7 +14,7 @@
 #include "../byte_order.hpp"
 #include "../exception.hpp"
 
-namespace NetBox::pdu {
+namespace netbox::pdu {
 
 /// EthernetII protocol data unit (PDU)
 class EthernetII
@@ -114,6 +114,6 @@ inline std::string toString(const EthernetII::Address& address)
     return buffer;
 }
 
-} /* namespace NetBox::pdu */
+} /* namespace netbox::pdu */
 
 #endif /* KSERGEY_ethernet_160318163752 */

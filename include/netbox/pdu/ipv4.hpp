@@ -10,7 +10,7 @@
 #include "../address_v4.hpp"
 #include "../exception.hpp"
 
-namespace NetBox::pdu {
+namespace netbox::pdu {
 
 /// IPv4 protocol data unit (PDU)
 class IPv4
@@ -126,6 +126,6 @@ inline constexpr std::uint32_t IPv4::payloadSize() const noexcept
     return size_ - HeaderSize;
 }
 
-} /* namespace NetBox::pdu */
+} /* namespace netbox::pdu */
 
 #endif /* KSERGEY_ipv4_160318161830 */

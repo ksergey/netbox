@@ -8,7 +8,7 @@
 #include <ctime>
 #include "pcap.hpp"
 
-namespace NetBox::pcap {
+namespace netbox::pcap {
 
 /// PCAP packet
 class Packet
@@ -60,6 +60,6 @@ public:
     }
 };
 
-} /* namespace NetBox::pcap */
+} /* namespace netbox::pcap */
 
 #endif /* KSERGEY_packet_150318174631 */

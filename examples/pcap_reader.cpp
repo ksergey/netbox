@@ -4,14 +4,14 @@
 
 #include <iostream>
 #include <iomanip>
-#include <NetBox/pcap/reader.hpp>
-#include <NetBox/pcap_packet_source.hpp>
-#include <NetBox/pdu/ethernetii.hpp>
-#include <NetBox/pdu/ipv4.hpp>
-#include <NetBox/pdu/udp.hpp>
+#include <netbox/pcap/reader.hpp>
+#include <netbox/pcap_packet_source.hpp>
+#include <netbox/pdu/ethernetii.hpp>
+#include <netbox/pdu/ipv4.hpp>
+#include <netbox/pdu/udp.hpp>
 
-namespace PCAP = NetBox::pcap;
-using namespace NetBox::pdu;
+namespace PCAP = netbox::pcap;
+using namespace netbox::pdu;
 
 void printPacket(const auto& packet)
 {

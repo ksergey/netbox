@@ -7,7 +7,7 @@
 
 #include "address_v4.hpp"
 
-namespace NetBox {
+namespace netbox {
 
 /// IPv6 address
 class AddressV6
@@ -170,6 +170,6 @@ inline AddressV6 makeAddresV6(const char* str)
     return {bytes, 0};
 }
 
-} /* namespace NetBox */
+} /* namespace netbox */
 
 #endif /* KSERGEY_address_v6_150318000444 */
