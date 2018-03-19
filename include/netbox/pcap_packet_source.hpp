@@ -35,9 +35,9 @@ public:
     /// Return true if no more data available
     bool isDone() const noexcept;
 
-    /// Add PCAP file to read
+    /// Add PCAP file to read queue
     /// @param[in] filename is path to PCAP file
-    void addFiled(const char* filename);
+    void addFile(const char* filename);
 
     /// Process next packet
     /// Call done callback in case of `isDone == true`
@@ -53,7 +53,7 @@ private:
     void appendQueue(Reader& reader);
 };
 
-inline void PcapPacketSource::addFiled(const char* filename)
+inline void PcapPacketSource::addFile(const char* filename)
 {
     Reader reader{filename};
     if (!reader) {
