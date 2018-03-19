@@ -53,6 +53,11 @@ private:
     void appendQueue(Reader& reader);
 };
 
+inline bool PcapPacketSource::isDone() const noexcept
+{
+    return queue_.empty();
+}
+
 inline void PcapPacketSource::addFile(const char* filename)
 {
     Reader reader{filename};
