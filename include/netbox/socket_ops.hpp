@@ -31,7 +31,7 @@ inline OpResult bind(Socket& socket, std::uint16_t port, const AddressV4& addr) 
     sockaddr_in bind_addr{};
     bind_addr.sin_family = AF_INET;
     bind_addr.sin_addr.s_addr = addr.toUint();
-    bind_addr.sin_port = netbox::htons(port);
+    bind_addr.sin_port = hostToNetwork16(port);
     return bind(socket, reinterpret_cast< sockaddr* >(&bind_addr), sizeof(bind_addr));
 }
 

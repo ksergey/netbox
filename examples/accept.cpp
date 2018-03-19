@@ -35,8 +35,8 @@ int main(int argc, char* argv[])
 
         sockaddr_in addr{};
         addr.sin_family = AF_INET;
-        addr.sin_port = netbox::htons(port);
-        addr.sin_addr.s_addr = netbox::htonl(bindAddress.toUint());
+        addr.sin_port = hostToNetwork16(port);
+        addr.sin_addr.s_addr = hostToNetwork32(bindAddress.toUint());
 
         if (auto result = bind(socket, reinterpret_cast< sockaddr* >(&addr), sizeof(addr)); !result) {
             std::cout << "Can't bind socket (" << result.str() << ")\n";

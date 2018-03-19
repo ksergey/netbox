@@ -49,7 +49,7 @@ public:
             throwEx< AddressError >("AddressV4 from unsigned integer");
         }
 
-        data_.s_addr = netbox::htonl(addr);
+        data_.s_addr = hostToNetwork32(addr);
     }
 
     /// Get the address in bytes, in network byte order
@@ -63,7 +63,7 @@ public:
     /// Get the address as an unsigned integer in host byte order
     constexpr uint_type toUint() const noexcept
     {
-        return netbox::ntohl(data_.s_addr);
+        return networkToHost32(data_.s_addr);
     }
 
     /// Determine whether the address is a loopback address

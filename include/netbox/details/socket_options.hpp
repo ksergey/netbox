@@ -136,8 +136,8 @@ public:
             const AddressV4& networkInterface = AddressV4::any())
         : family_{PF_INET}
     {
-        v4_.imr_multiaddr.s_addr = netbox::htonl(multicastAddress.toUint());
-        v4_.imr_interface.s_addr = netbox::htonl(networkInterface.toUint());
+        v4_.imr_multiaddr.s_addr = hostToNetwork32(multicastAddress.toUint());
+        v4_.imr_interface.s_addr = hostToNetwork32(networkInterface.toUint());
     }
 
     /// Construct IPv6 request
@@ -201,9 +201,9 @@ public:
             const AddressV4& multicastSourceAddress,
             const AddressV4& networkInterface = AddressV4::any())
     {
-        value_.imr_multiaddr.s_addr = netbox::htonl(multicastAddress.toUint());
-        value_.imr_interface.s_addr = netbox::htonl(networkInterface.toUint());
-        value_.imr_sourceaddr.s_addr = netbox::htonl(multicastSourceAddress.toUint());
+        value_.imr_multiaddr.s_addr = hostToNetwork32(multicastAddress.toUint());
+        value_.imr_interface.s_addr = hostToNetwork32(networkInterface.toUint());
+        value_.imr_sourceaddr.s_addr = hostToNetwork32(multicastSourceAddress.toUint());
     }
 
     constexpr int level() const noexcept
