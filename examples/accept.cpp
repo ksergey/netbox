@@ -5,7 +5,6 @@
 #include <cstdlib>
 #include <iostream>
 #include <netbox/socket_ops.hpp>
-#include <netbox/socket_ops.hpp>
 #include <netbox/socket_options.hpp>
 
 using namespace netbox;
