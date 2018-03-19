@@ -5,7 +5,6 @@
 #include <iostream>
 #include <iomanip>
 #include <netbox/pcap/reader.hpp>
-#include <netbox/pcap_packet_source.hpp>
 #include <netbox/pdu/ethernetii.hpp>
 #include <netbox/pdu/ipv4.hpp>
 #include <netbox/pdu/udp.hpp>

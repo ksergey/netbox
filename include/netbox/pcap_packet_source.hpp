@@ -18,7 +18,7 @@ class PcapPacketSource
 private:
     using Packet = pcap::Packet;
     using Reader = pcap::Reader;
-    using Storage = std::vector< Reader >;
+    using Storage = std::vector< std::unique_ptr< Reader > >;
     using SourceContext = std::pair< Packet, Reader& >;
     using Queue = std::multimap< std::uint64_t, SourceContext >;
 
@@ -60,13 +60,13 @@ inline bool PcapPacketSource::isDone() const noexcept
 
 inline void PcapPacketSource::addFile(const char* filename)
 {
-    Reader reader{filename};
-    if (!reader) {
+    auto reader = std::make_unique< Reader >(filename);
+    if (!*reader) {
         return debug("<WARN> File open error \"%s\"", filename);
     }
 
     storage_.push_back(std::move(reader));
-    appendQueue(storage_.back());
+    appendQueue(*storage_.back());
 }
 
 template< class Callback >

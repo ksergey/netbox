@@ -32,15 +32,6 @@ public:
     Reader(const Reader&) = delete;
     Reader& operator=(const Reader&) = delete;
 
-    /// Move constructor
-    Reader(Reader&& other) noexcept;
-
-    /// Move operator
-    Reader& operator=(Reader&& other) noexcept;
-
-    /// Default constructor
-    Reader() = default;
-
     /// Construct reader
     /// @param[in] filename is path to PCAP file
     Reader(const char* filename);
@@ -57,25 +48,9 @@ public:
     /// Read packet
     Packet readPacket();
 
-    /// Swap two readers
-    void swap(Reader& other) noexcept;
-
 private:
     void readFileHeader();
 };
-
-inline Reader::Reader(Reader&& other) noexcept
-{
-    swap(other);
-}
-
-inline Reader& Reader::operator=(Reader&& other) noexcept
-{
-    if (this != &other) {
-        swap(other);
-    }
-    return *this;
-}
 
 inline Reader::Reader(const char* filename)
     : file_{filename}
@@ -130,14 +105,6 @@ inline Packet Reader::readPacket()
     }
 
     return {header, buffer_.data()};
-}
-
-inline void Reader::swap(Reader& other) noexcept
-{
-    file_.swap(other.file_);
-    std::swap(scale_, other.scale_);
-    std::swap(timezone_, other.timezone_);
-    std::swap(buffer_, other.buffer_);
 }
 
 inline void Reader::readFileHeader()

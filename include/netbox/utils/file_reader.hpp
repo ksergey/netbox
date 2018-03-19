@@ -6,6 +6,7 @@
 #define KSERGEY_file_reader_160318100835
 
 #include <fstream>
+#include <memory>
 #include <type_traits>
 #include <utility>
 #include "../debug.hpp"
@@ -27,8 +28,9 @@ namespace netbox::utils {
 class FileReader
 {
 private:
-    std::ifstream fileStream_;
-    std::istream* stream_{&fileStream_};
+    std::unique_ptr< std::ifstream > fileStream_;
+    std::unique_ptr< std::istream > decodedStream_;
+    std::istream* stream_;
 
 public:
     FileReader(const FileReader&) = delete;
@@ -50,42 +52,43 @@ public:
     }
 
     /// Construct uninitialized FileReader
-    FileReader() = default;
+    FileReader()
+    {
+        fileStream_ = std::make_unique< std::ifstream >();
+        stream_ = fileStream_.get();
+    }
 
     /// Open file from disk
     /// @param[in] filename is path to file
     /// @throw std::runtime_error if file open error
     FileReader(const char* filename)
     {
-        fileStream_.open(filename, std::ios::in | std::ios::binary);
-        if (fileStream_) {
+        fileStream_ = std::make_unique< std::ifstream >(filename, std::ios::in | std::ios::binary);
+        if (*fileStream_) {
             if (endsWith(filename, ".xz")) {
 #if defined( netbox_PCAP_LZMA )
-                stream_ = new LZMADecompressStream(fileStream_);
+                decodedStream_ = std::make_unique< LZMADecompressStream >(*fileStream_);
 #else // defined( netbox_PCAP_LZMA )
                 throwEx< std::runtime_error >("LZMA not supported");
 #endif // defined( netbox_PCAP_LZMA )
             } else if (endsWith(filename, ".gz")) {
 #if defined( netbox_PCAP_GZIP )
-                stream_ = new GZipDecompressStream(fileStream_);
+                decodedStream_ = std::make_unique< GZipDecompressStream >(*fileStream_);
 #else // defined( netbox_PCAP_GZIP )
                 throwEx< std::runtime_error >("GZip not supported");
 #endif // defined( netbox_PCAP_GZIP )
-            } else {
-                stream_ = &fileStream_;
             }
         } else {
             debug("<WARN> File open error (%s)", filename);
         }
+
+        stream_ = decodedStream_
+            ? decodedStream_.get()
+            : fileStream_.get();
     }
 
     /// Destructor
-    virtual ~FileReader() noexcept
-    {
-        if (stream_ != &fileStream_) {
-            delete stream_;
-        }
-    }
+    virtual ~FileReader() noexcept = default;
 
     /// Return true if file still readable
     explicit operator bool() const noexcept
@@ -129,19 +132,9 @@ public:
     /// Swap FileReader internals with other instance
     void swap(FileReader& other) noexcept
     {
-        bool otherRefStream = (other.stream_ == &other.fileStream_);
-        bool thisRefStream = (stream_ == &fileStream_);
-
         fileStream_.swap(other.fileStream_);
+        decodedStream_.swap(other.decodedStream_);
         std::swap(stream_, other.stream_);
-
-        if (otherRefStream) {
-            stream_ = &fileStream_;
-        }
-
-        if (thisRefStream) {
-            other.stream_ = &other.fileStream_;
-        }
     }
 };
 
