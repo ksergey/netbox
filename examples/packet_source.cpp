@@ -21,9 +21,10 @@ int main(int argc, const char* argv[])
 
         std::size_t count{0};
         while (!source.isDone()) {
-            source.process([&count]([[maybe_unused]] const auto& packet) {
+            auto packet = source.readNextPacket();
+            if (packet) {
                 count += 1;
-            });
+            }
         }
 
         std::cout << "Read " << count << " packets\n";
