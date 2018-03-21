@@ -6,6 +6,7 @@
 #define KSERGEY_buffer_190318010659
 
 #include <cstddef>
+#include "compiler.hpp"
 
 namespace netbox {
 
@@ -83,22 +84,22 @@ constexpr std::size_t bufferSize(const Buffer& v) noexcept
 
 namespace details {
 
-inline constexpr void* bufferCastHelper(const MutableBuffer& v) noexcept
+NETBOX_FINLINE constexpr void* bufferCastHelper(const MutableBuffer& v) noexcept
 {
     return v.data_;
 }
 
-inline constexpr const void* bufferCastHelper(const ConstBuffer& v) noexcept
+NETBOX_FINLINE constexpr const void* bufferCastHelper(const ConstBuffer& v) noexcept
 {
     return v.data_;
 }
 
-inline constexpr std::size_t bufferSizeHelper(const MutableBuffer& v) noexcept
+NETBOX_FINLINE constexpr std::size_t bufferSizeHelper(const MutableBuffer& v) noexcept
 {
     return v.size_;
 }
 
-inline constexpr std::size_t bufferSizeHelper(const ConstBuffer& v) noexcept
+NETBOX_FINLINE constexpr std::size_t bufferSizeHelper(const ConstBuffer& v) noexcept
 {
     return v.size_;
 }

@@ -91,17 +91,17 @@ inline Socket::~Socket() noexcept
     }
 }
 
-inline Socket::operator bool() const noexcept
+NETBOX_FINLINE Socket::operator bool() const noexcept
 {
     return sock_ != BadFd;
 }
 
-inline int Socket::native() noexcept
+NETBOX_FINLINE int Socket::native() noexcept
 {
     return sock_;
 }
 
-inline void Socket::close() noexcept
+NETBOX_FINLINE void Socket::close() noexcept
 {
     if (sock_ != BadFd) {
         ::close(sock_);
@@ -109,7 +109,7 @@ inline void Socket::close() noexcept
     }
 }
 
-inline void Socket::swap(Socket& other) noexcept
+NETBOX_FINLINE void Socket::swap(Socket& other) noexcept
 {
     std::swap(other.sock_, sock_);
 }

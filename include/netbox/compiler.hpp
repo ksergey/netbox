@@ -13,4 +13,8 @@
 #   define NETBOX_UNLIKELY(x) __builtin_expect(static_cast< bool >(x), false)
 #endif
 
+#ifndef NETBOX_FINLINE
+#   define NETBOX_FINLINE inline __attribute__((always_inline))
+#endif
+
 #endif /* KSERGEY_compiler_140318105608 */
