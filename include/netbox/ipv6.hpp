@@ -24,7 +24,7 @@ struct IPv6
     static Address addressFromString(const char* str);
 };
 
-NETBOX_FINLINE IPv6::Address IPv6::addressFromString(const char* str)
+inline IPv6::Address IPv6::addressFromString(const char* str)
 {
     Address::Bytes bytes;
     if (inet_pton(AF_INET6, str, bytes.data()) <= 0) {
@@ -50,7 +50,7 @@ constexpr bool isMulticast(const IPv6::Address& address) noexcept
 }
 
 /// Convert to string an IPv6 address
-NETBOX_FINLINE std::string toString(const IPv6::Address& address) noexcept
+inline std::string toString(const IPv6::Address& address) noexcept
 {
     char storage[INET6_ADDRSTRLEN];
     auto result = inet_ntop(AF_INET6, address.toBytes().data(), storage, sizeof(storage));

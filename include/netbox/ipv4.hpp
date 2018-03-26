@@ -26,7 +26,7 @@ struct IPv4
     // TODO: endpointFromString
 };
 
-NETBOX_FINLINE IPv4::Address IPv4::addressFromString(const char* str)
+inline IPv4::Address IPv4::addressFromString(const char* str)
 {
     Address::Bytes bytes;
     if (inet_pton(AF_INET, str, bytes.data()) <= 0) {
@@ -48,7 +48,7 @@ constexpr bool isMulticast(const IPv4::Address& address) noexcept
 }
 
 /// Convert to string an IPv4 address
-NETBOX_FINLINE std::string toString(const IPv4::Address& address) noexcept
+inline std::string toString(const IPv4::Address& address) noexcept
 {
     char storage[INET_ADDRSTRLEN];
     auto result = inet_ntop(AF_INET, address.toBytes().data(), storage, sizeof(storage));

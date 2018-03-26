@@ -13,14 +13,14 @@ namespace netbox {
 
 /// Set socket option
 template< class Option >
-NETBOX_FINLINE OpResult setOption(Socket& socket, const Option& option) noexcept
+inline OpResult setOption(Socket& socket, const Option& option) noexcept
 {
     return setsockopt(socket.native(), option.level(), option.name(), option.data(), option.size());
 }
 
 /// Get socket option
 template< class Option >
-NETBOX_FINLINE OpResult getOption(Socket& socket, Option& option) noexcept
+inline OpResult getOption(Socket& socket, Option& option) noexcept
 {
     socklen_t size = option.size();
     OpResult result = getsockopt(socket.native(), option.level(), option.name(), option.data(), &size);
