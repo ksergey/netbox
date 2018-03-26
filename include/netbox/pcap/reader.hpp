@@ -138,18 +138,12 @@ inline void Reader::readFileHeader()
                 header.snaplen, MaxSnapLen);
     }
 
-    debug("Snaplen %u", header.snaplen);
-
     if (header.linktype != Ethernet) {
         return (file_ = {}), debug("<WARN> Linktype %u not supported", header.linktype);
     }
 
     // Timezone correction
     timezone_ = header.thiszone;
-
-    debug("Linktype %u", header.linktype);
-    debug("PCAP version %hu.%hu", header.version_major, header.version_minor);
-    debug("PCAP thiszone %d", header.thiszone);
 
     // Prepare buffer
     buffer_.resize(header.snaplen);
