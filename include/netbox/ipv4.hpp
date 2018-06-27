@@ -1,6 +1,6 @@
-/*
- * Copyright (c) 2017 Sergey Kovalevich <inndie@gmail.com>
- */
+// ------------------------------------------------------------
+// Copyright (c) 2017-2018 Sergey Kovalevich <inndie@gmail.com>
+// ------------------------------------------------------------
 
 #ifndef KSERGEY_ipv4_190318224656
 #define KSERGEY_ipv4_190318224656

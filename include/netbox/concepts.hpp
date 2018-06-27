@@ -1,6 +1,6 @@
-/*
- * Copyright (c) 2017 Sergey Kovalevich <inndie@gmail.com>
- */
+// ------------------------------------------------------------
+// Copyright (c) 2017-2018 Sergey Kovalevich <inndie@gmail.com>
+// ------------------------------------------------------------
 
 #ifndef KSERGEY_concepts_190318235641
 #define KSERGEY_concepts_190318235641

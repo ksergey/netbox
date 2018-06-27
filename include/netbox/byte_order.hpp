@@ -1,6 +1,6 @@
-/*
- * Copyright (c) 2017 Sergey Kovalevich <inndie@gmail.com>
- */
+// ------------------------------------------------------------
+// Copyright (c) 2017-2018 Sergey Kovalevich <inndie@gmail.com>
+// ------------------------------------------------------------
 
 #ifndef KSERGEY_byte_order_140318234029
 #define KSERGEY_byte_order_140318234029

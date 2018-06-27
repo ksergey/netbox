@@ -1,6 +1,6 @@
-/*
- * Copyright (c) 2017 Sergey Kovalevich <inndie@gmail.com>
- */
+// ------------------------------------------------------------
+// Copyright (c) 2017-2018 Sergey Kovalevich <inndie@gmail.com>
+// ------------------------------------------------------------
 
 #ifndef KSERGEY_pcap_packet_source_160318115317
 #define KSERGEY_pcap_packet_source_160318115317

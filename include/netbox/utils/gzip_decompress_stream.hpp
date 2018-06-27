@@ -1,6 +1,6 @@
-/*
- * Copyright (c) 2017 Sergey Kovalevich <inndie@gmail.com>
- */
+// ------------------------------------------------------------
+// Copyright (c) 2017-2018 Sergey Kovalevich <inndie@gmail.com>
+// ------------------------------------------------------------
 
 #ifndef KSERGEY_gz_decompress_stream_300117184757
 #define KSERGEY_gz_decompress_stream_300117184757
