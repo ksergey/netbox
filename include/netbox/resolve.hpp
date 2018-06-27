@@ -5,6 +5,7 @@
 #ifndef KSERGEY_resolve_270618163249
 #define KSERGEY_resolve_270618163249
 
+#include <arpa/inet.h>
 #include <netdb.h>
 #include <sys/socket.h>
 #include <sys/types.h>
