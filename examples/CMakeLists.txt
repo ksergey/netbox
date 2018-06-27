@@ -22,3 +22,7 @@ target_compile_options(PacketSource PRIVATE -Wall -Wextra)
 add_executable(Accept accept.cpp)
 target_link_libraries(Accept ksergey::netbox)
 target_compile_options(Accept PRIVATE -Wall -Wextra)
+
+add_executable(Connect connect.cpp)
+target_link_libraries(Connect ksergey::netbox)
+target_compile_options(Connect PRIVATE -Wall -Wextra)

@@ -1,6 +1,6 @@
-/*
- * Copyright (c) 2017 Sergey Kovalevich <inndie@gmail.com>
- */
+// -------------------------------------------------------
+// Copyright (c) 2017-2018 Sergey Kovalevich <inndie@gmail.com>
+// -------------------------------------------------------
 
 #ifndef KSERGEY_socket_140318103443
 #define KSERGEY_socket_140318103443
@@ -12,6 +12,7 @@
 #include <utility>
 #include "compiler.hpp"
 #include "exception.hpp"
+#include "protocol.hpp"
 
 namespace netbox {
 
@@ -64,15 +65,18 @@ public:
 
     /// Create socket
     /// @throw SocketError if error
-    static Socket create(int family, int sockType, int protocol) throw();
+    static Socket create(int family, int sockType, int protocol);
+
+    /// @overload
+    static Socket create(const Protocol& proto);
 };
 
-inline Socket::Socket(Socket&& other) noexcept
+NETBOX_FORCE_INLINE Socket::Socket(Socket&& other) noexcept
 {
     swap(other);
 }
 
-inline Socket& Socket::operator=(Socket&& other) noexcept
+NETBOX_FORCE_INLINE Socket& Socket::operator=(Socket&& other) noexcept
 {
     if (NETBOX_LIKELY(this != &other)) {
         swap(other);
@@ -80,28 +84,28 @@ inline Socket& Socket::operator=(Socket&& other) noexcept
     return *this;
 }
 
-inline Socket::Socket(int sock) noexcept
+NETBOX_FORCE_INLINE Socket::Socket(int sock) noexcept
     : sock_{sock}
 {}
 
-inline Socket::~Socket() noexcept
+NETBOX_FORCE_INLINE Socket::~Socket() noexcept
 {
     if (sock_ != BadFd) {
         ::close(sock_);
     }
 }
 
-inline Socket::operator bool() const noexcept
+NETBOX_FORCE_INLINE Socket::operator bool() const noexcept
 {
     return sock_ != BadFd;
 }
 
-inline int Socket::native() noexcept
+NETBOX_FORCE_INLINE int Socket::native() noexcept
 {
     return sock_;
 }
 
-inline void Socket::close() noexcept
+NETBOX_FORCE_INLINE void Socket::close() noexcept
 {
     if (sock_ != BadFd) {
         ::close(sock_);
@@ -109,12 +113,12 @@ inline void Socket::close() noexcept
     }
 }
 
-inline void Socket::swap(Socket& other) noexcept
+NETBOX_FORCE_INLINE void Socket::swap(Socket& other) noexcept
 {
     std::swap(other.sock_, sock_);
 }
 
-inline bool Socket::setNonBlocking(bool value) noexcept
+NETBOX_FORCE_INLINE bool Socket::setNonBlocking(bool value) noexcept
 {
     int flags = ::fcntl(native(), F_GETFL, 0);
     if (flags == -1) {
@@ -128,7 +132,7 @@ inline bool Socket::setNonBlocking(bool value) noexcept
     return 0 == ::fcntl(native(), F_SETFL, flags);
 }
 
-inline bool Socket::setCloexec(bool value) noexcept
+NETBOX_FORCE_INLINE bool Socket::setCloexec(bool value) noexcept
 {
     int flags = ::fcntl(native(), F_GETFL, 0);
     if (flags == -1) {
@@ -142,13 +146,18 @@ inline bool Socket::setCloexec(bool value) noexcept
     return 0 == ::fcntl(native(), F_SETFL, flags);
 }
 
-inline Socket Socket::create(int family, int sockType, int protocol) throw()
+NETBOX_FORCE_INLINE Socket Socket::create(int family, int sockType, int protocol)
 {
     int sock = ::socket(family, sockType, protocol);
     if (sock == BadFd) {
-        throwEx< SocketError >("Socket::create", errno);
+        throwEx< SocketError >("socket", errno);
     }
     return {sock};
+}
+
+NETBOX_FORCE_INLINE Socket Socket::create(const Protocol& proto)
+{
+    return Socket::create(proto.domain, proto.type, proto.protocol);
 }
 
 } /* namespace netbox */

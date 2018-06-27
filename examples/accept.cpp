@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 {
     try {
         if (argc < 2) {
-            std::cout << "Usage: example3 <port> [bind-ip]\n";
+            std::cout << "Usage: Accept <port> [bind-ip]\n";
             return EXIT_FAILURE;
         }
 

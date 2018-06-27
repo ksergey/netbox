@@ -71,9 +71,9 @@ public:
     }
 };
 
-/// Hold result of accept
+/// Hold result of accept or connect
 /// @see `man 2 accept`
-class AcceptResult
+class SocketResult
     : public ErrorCode
 {
 private:
@@ -81,12 +81,18 @@ private:
 
 public:
     /// Construct undefined result
-    AcceptResult() = default;
+    SocketResult() = default;
 
     /// Construct result with result of accept
-    AcceptResult(int value)
+    SocketResult(int value)
         : ErrorCode{value == BadFd ? errno : 0}
         , socket_{value}
+    {}
+
+    /// @overload
+    SocketResult(Socket&& socket)
+        : ErrorCode{!socket_.operator bool() ? errno : 0}
+        , socket_{std::move(socket)}
     {}
 
     /// Return true if operation was success
