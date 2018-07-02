@@ -149,6 +149,7 @@ public:
 inline std::string toString(AddressResolveResult::value_type value)
 {
     char storage[INET_ADDRSTRLEN];
+    // TODO: there is should be networkToHost
     auto result = inet_ntop(value.domain(), value.data(), storage, sizeof(storage));
     if (result == nullptr) {
         return {};
