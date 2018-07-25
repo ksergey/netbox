@@ -27,8 +27,6 @@ struct IPv4
 
     /// @overload
     static Address addressFromString(std::string_view str);
-
-    // TODO: endpointFromString
 };
 
 inline IPv4::Address IPv4::addressFromString(const char* str)
