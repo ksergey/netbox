@@ -60,6 +60,18 @@ inline std::string toString(const IPv6::Address& address) noexcept
     return storage;
 }
 
+/// Compare two endpoints for equality
+constexpr bool operator==(const IPv6::Endpoint& ep1, const IPv6::Endpoint& ep2) noexcept
+{
+    return ep1.address() == ep2.address() && ep1.port() == ep2.port();
+}
+
+/// Compare two endpoints for non-equality
+constexpr bool operator!=(const IPv6::Endpoint& ep1, const IPv6::Endpoint& ep2) noexcept
+{
+    return !(ep1 == ep2);
+}
+
 } /* namespace netbox */
 
 #endif /* KSERGEY_ipv6_190318232635 */
