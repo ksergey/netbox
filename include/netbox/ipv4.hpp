@@ -5,6 +5,8 @@
 #ifndef KSERGEY_ipv4_190318224656
 #define KSERGEY_ipv4_190318224656
 
+#include <string_view>
+
 #include "details/ipv4/address.hpp"
 #include "details/ipv4/endpoint.hpp"
 
@@ -23,7 +25,8 @@ struct IPv4
     /// @throw AddressError if `inet_pton` failed
     static Address addressFromString(const char* str);
 
-    // TODO: endpointFromString
+    /// @overload
+    static Address addressFromString(std::string_view str);
 };
 
 inline IPv4::Address IPv4::addressFromString(const char* str)
@@ -33,6 +36,11 @@ inline IPv4::Address IPv4::addressFromString(const char* str)
         throwEx< AddressError >("IPv4:;Address from string");
     }
     return {bytes};
+}
+
+inline IPv4::Address IPv4::addressFromString(std::string_view str)
+{
+    return addressFromString(std::string{str}.c_str());
 }
 
 /// Determine whether the address is a loopback address

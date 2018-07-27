@@ -5,6 +5,8 @@
 #ifndef KSERGEY_ipv6_190318232635
 #define KSERGEY_ipv6_190318232635
 
+#include <string_view>
+
 #include "details/ipv6/address.hpp"
 #include "details/ipv6/endpoint.hpp"
 
@@ -22,6 +24,9 @@ struct IPv6
     /// Create an IPv6 address from a string
     /// @throw AddressError if `inet_pton` failed
     static Address addressFromString(const char* str);
+
+    /// @overload
+    static Address addressFromString(std::string_view str);
 };
 
 inline IPv6::Address IPv6::addressFromString(const char* str)
@@ -31,6 +36,11 @@ inline IPv6::Address IPv6::addressFromString(const char* str)
         throwEx< AddressError >("IPv6::Address from string");
     }
     return {bytes, 0};
+}
+
+inline IPv6::Address IPv6::addressFromString(std::string_view str)
+{
+    return addressFromString(std::string{str}.c_str());
 }
 
 /// Determine whether the address is a loopback address
