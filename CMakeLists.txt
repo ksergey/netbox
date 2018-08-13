@@ -2,9 +2,12 @@ cmake_minimum_required(VERSION 3.0)
 
 project(netbox LANGUAGES CXX)
 
+set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
 option(netbox_BUILD_EXAMPLES "Build library examples" ON)
 option(netbox_PCAP_GZIP "Build gzip decoder for pcap files" OFF)
 option(netbox_PCAP_LZMA "Build lzma decoder for pcap files" OFF)
+option(netbox_BUILD_TESTS "Build tests" ON)
 
 # Create library target
 add_library(netbox INTERFACE)
@@ -33,4 +36,10 @@ add_library(ksergey::netbox ALIAS netbox)
 # Build examples
 if (netbox_BUILD_EXAMPLES)
     add_subdirectory(examples)
+endif()
+
+# Build tests
+if (netbox_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
 endif()
