@@ -23,25 +23,21 @@ struct IPv4
 
     /// Create an IPv4 address from an IP address string in dotted decimal form
     /// @throw AddressError if `inet_pton` failed
-    static Address addressFromString(const char* str);
+    static Address addressFromString(const char* str)
+    {
+        Address::Bytes bytes;
+        if (inet_pton(AF_INET, str, bytes.data()) <= 0) {
+            throwEx< AddressError >("IPv4:;Address from string");
+        }
+        return {bytes};
+    }
 
     /// @overload
-    static Address addressFromString(std::string_view str);
-};
-
-inline IPv4::Address IPv4::addressFromString(const char* str)
-{
-    Address::Bytes bytes;
-    if (inet_pton(AF_INET, str, bytes.data()) <= 0) {
-        throwEx< AddressError >("IPv4:;Address from string");
+    static Address addressFromString(std::string_view str)
+    {
+        return addressFromString(std::string{str}.c_str());
     }
-    return {bytes};
-}
-
-inline IPv4::Address IPv4::addressFromString(std::string_view str)
-{
-    return addressFromString(std::string{str}.c_str());
-}
+};
 
 /// Determine whether the address is a loopback address
 constexpr bool isLoopback(const IPv4::Address& address) noexcept

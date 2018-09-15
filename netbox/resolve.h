@@ -33,31 +33,32 @@ private:
             : data_(data)
         {}
 
-        NETBOX_FORCE_INLINE explicit operator bool() const noexcept
+        explicit operator bool() const noexcept
         {
-            return data_ != nullptr; }
+            return data_ != nullptr;
+        }
 
-        NETBOX_FORCE_INLINE int domain() const noexcept
+        int domain() const noexcept
         {
             return data_->ai_family;
         }
 
-        NETBOX_FORCE_INLINE int type() const noexcept
+        int type() const noexcept
         {
             return data_->ai_socktype;
         }
 
-        NETBOX_FORCE_INLINE int protocol() const noexcept
+        int protocol() const noexcept
         {
             return data_->ai_protocol;
         }
 
-        NETBOX_FORCE_INLINE const sockaddr* data() const noexcept
+        const sockaddr* data() const noexcept
         {
             return data_->ai_addr;
         }
 
-        NETBOX_FORCE_INLINE socklen_t size() const noexcept
+        socklen_t size() const noexcept
         {
             return data_->ai_addrlen;
         }
@@ -76,7 +77,7 @@ private:
             : data_{data}
         {}
 
-        NETBOX_FORCE_INLINE Iterator& operator++() noexcept
+        Iterator& operator++() noexcept
         {
             if (data_ != nullptr) {
                 data_ = data_->ai_next;
@@ -84,17 +85,17 @@ private:
             return *this;
         }
 
-        NETBOX_FORCE_INLINE bool operator==(const Iterator& it) const noexcept
+        bool operator==(const Iterator& it) const noexcept
         {
             return data_ == it.data_;
         }
 
-        NETBOX_FORCE_INLINE bool operator!=(const Iterator& it) const noexcept
+        bool operator!=(const Iterator& it) const noexcept
         {
             return data_ != it.data_;
         }
 
-        NETBOX_FORCE_INLINE reference operator*() const noexcept
+        reference operator*() const noexcept
         {
             return {data_};
         }
@@ -103,7 +104,7 @@ private:
     // `addrinfo` deallocator
     struct Deleter
     {
-        NETBOX_FORCE_INLINE void operator()(addrinfo* a) const noexcept
+        void operator()(addrinfo* a) const noexcept
         {
             if (a) {
                 freeaddrinfo(a);
@@ -159,7 +160,7 @@ inline std::string toString(AddressResolveResult::value_type value)
 }
 
 /// Resolve address
-NETBOX_FORCE_INLINE AddressResolveResult resolve(const Protocol& protocol, const char* address, const char* port) noexcept
+inline AddressResolveResult resolve(const Protocol& protocol, const char* address, const char* port) noexcept
 {
     addrinfo hints{};
     hints.ai_family = protocol.domain;
@@ -173,13 +174,13 @@ NETBOX_FORCE_INLINE AddressResolveResult resolve(const Protocol& protocol, const
 }
 
 /// @overload
-NETBOX_FORCE_INLINE AddressResolveResult resolve(const Protocol& protocol, std::string_view address, std::string_view port) noexcept
+inline AddressResolveResult resolve(const Protocol& protocol, std::string_view address, std::string_view port) noexcept
 {
     return resolve(protocol, std::string{address}.c_str(), std::string{port}.c_str());
 }
 
 /// @overload
-NETBOX_FORCE_INLINE AddressResolveResult resolve(const Protocol& protocol, std::string_view address) noexcept
+inline AddressResolveResult resolve(const Protocol& protocol, std::string_view address) noexcept
 {
     std::size_t found = address.rfind(':');
     return (found != std::string::npos)

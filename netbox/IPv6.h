@@ -23,25 +23,21 @@ struct IPv6
 
     /// Create an IPv6 address from a string
     /// @throw AddressError if `inet_pton` failed
-    static Address addressFromString(const char* str);
+    static Address addressFromString(const char* str)
+    {
+        Address::Bytes bytes;
+        if (inet_pton(AF_INET6, str, bytes.data()) <= 0) {
+            throwEx< AddressError >("IPv6::Address from string");
+        }
+        return {bytes, 0};
+    }
 
     /// @overload
-    static Address addressFromString(std::string_view str);
-};
-
-inline IPv6::Address IPv6::addressFromString(const char* str)
-{
-    Address::Bytes bytes;
-    if (inet_pton(AF_INET6, str, bytes.data()) <= 0) {
-        throwEx< AddressError >("IPv6::Address from string");
+    static Address addressFromString(std::string_view str)
+    {
+        return addressFromString(std::string{str}.c_str());
     }
-    return {bytes, 0};
-}
-
-inline IPv6::Address IPv6::addressFromString(std::string_view str)
-{
-    return addressFromString(std::string{str}.c_str());
-}
+};
 
 /// Determine whether the address is a loopback address
 constexpr bool isLoopback(const IPv6::Address& address) noexcept
