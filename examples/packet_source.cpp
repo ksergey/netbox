@@ -1,12 +1,12 @@
-/*
- * Copyright (c) 2017 Sergey Kovalevich <inndie@gmail.com>
- */
+// ------------------------------------------------------------
+// Copyright 2017-present Sergey Kovalevich <inndie@gmail.com>
+// ------------------------------------------------------------
 
 #include <iostream>
-#include <netbox/pcap_packet_source.hpp>
-#include <netbox/pdu/ethernetii.hpp>
-#include <netbox/pdu/ipv4.hpp>
-#include <netbox/pdu/udp.hpp>
+#include <netbox/PcapPacketSource.h>
+#include <netbox/pdu/EthernetII.h>
+#include <netbox/pdu/IPv4.h>
+#include <netbox/pdu/UDP.h>
 
 using namespace netbox::pdu;
 

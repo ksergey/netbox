@@ -1,13 +1,13 @@
-/*
- * Copyright (c) 2017 Sergey Kovalevich <inndie@gmail.com>
- */
+// ------------------------------------------------------------
+// Copyright 2017-present Sergey Kovalevich <inndie@gmail.com>
+// ------------------------------------------------------------
 
 #include <iostream>
 #include <iomanip>
-#include <netbox/pcap/reader.hpp>
-#include <netbox/pdu/ethernetii.hpp>
-#include <netbox/pdu/ipv4.hpp>
-#include <netbox/pdu/udp.hpp>
+#include <netbox/pcap/Reader.h>
+#include <netbox/pdu/EthernetII.h>
+#include <netbox/pdu/IPv4.h>
+#include <netbox/pdu/UDP.h>
 
 namespace PCAP = netbox::pcap;
 using namespace netbox::pdu;

@@ -1,11 +1,11 @@
 // ------------------------------------------------------------
-// Copyright (c) 2017-2018 Sergey Kovalevich <inndie@gmail.com>
+// Copyright 2017-present Sergey Kovalevich <inndie@gmail.com>
 // ------------------------------------------------------------
 
 #include <cstdlib>
 #include <iostream>
-#include <netbox/socket_ops.hpp>
-#include <netbox/socket_options.hpp>
+#include <netbox/socket_ops.h>
+#include <netbox/socket_options.h>
 
 using namespace netbox;
 

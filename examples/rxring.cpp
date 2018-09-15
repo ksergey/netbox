@@ -1,12 +1,12 @@
-/*
- * Copyright (c) 2017 Sergey Kovalevich <inndie@gmail.com>
- */
+// ------------------------------------------------------------
+// Copyright 2017-present Sergey Kovalevich <inndie@gmail.com>
+// ------------------------------------------------------------
 
 #include <unistd.h>
 #include <iostream>
 #include <cmath>
-#include <netbox/socket.hpp>
-#include <netbox/socket_options.hpp>
+#include <netbox/Socket.h>
+#include <netbox/socket_options.h>
 
 using namespace netbox;
 

@@ -1,9 +1,9 @@
 // ------------------------------------------------------------
-// Copyright (c) 2018 Sergey Kovalevich <inndie@gmail.com>
+// Copyright 2018-present Sergey Kovalevich <inndie@gmail.com>
 // ------------------------------------------------------------
 
 #include <gtest/gtest.h>
-#include <netbox/ipv4.hpp>
+#include <netbox/IPv4.h>
 
 using namespace netbox;
 
