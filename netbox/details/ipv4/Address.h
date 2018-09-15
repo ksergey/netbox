@@ -12,7 +12,7 @@
 #include <array>
 #include <string>
 
-#include <netbox/byte_order.h>
+#include <netbox/details/byte_order.h>
 
 namespace netbox::details::ipv4 {
 
@@ -44,7 +44,7 @@ public:
     /// Construct an address from an unsigned integer in host byte order
     constexpr Address(UInt addr)
     {
-        storage_.s_addr = hostToNetwork32(addr);
+        storage_.s_addr = details::hostToNetwork32(addr);
     }
 
     /// Get the address in bytes, in network byte order
@@ -58,7 +58,7 @@ public:
     /// Get the address as an unsigned integer in host byte order
     constexpr UInt toUint() const noexcept
     {
-        return networkToHost32(storage_.s_addr);
+        return details::networkToHost32(storage_.s_addr);
     }
 
     /// Compare two addresses for equality

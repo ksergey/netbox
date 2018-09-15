@@ -7,7 +7,7 @@
 
 #include <cstdint>
 
-namespace netbox {
+namespace netbox::details {
 
 // Sadly, but native conversation functions cant be used inside constexpr.
 
@@ -47,6 +47,6 @@ constexpr std::uint16_t networkToHost16(std::uint16_t data) noexcept
     return hostToNetwork16(data);
 }
 
-} /* namespace netbox */
+} // namespace netbox::details
 
 #endif /* KSERGEY_byte_order_140318234029 */

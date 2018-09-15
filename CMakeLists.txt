@@ -20,11 +20,11 @@ target_compile_features(netbox INTERFACE cxx_std_17)
 target_sources(netbox
     INTERFACE
         ${netbox_dir}/buffer.h
-        ${netbox_dir}/byte_order.h
         ${netbox_dir}/compiler.h
-        ${netbox_dir}/concepts.h
         ${netbox_dir}/ConsumingBuffer.h
         ${netbox_dir}/debug.h
+        ${netbox_dir}/details/byte_order.h
+        ${netbox_dir}/details/concepts.h
         ${netbox_dir}/details/ipv4/Address.h
         ${netbox_dir}/details/ipv4/Endpoint.h
         ${netbox_dir}/details/ipv6/Address.h

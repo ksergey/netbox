@@ -12,8 +12,6 @@
 #include <array>
 #include <string>
 
-#include <netbox/byte_order.h>
-
 namespace netbox::details::ipv6 {
 
 /// IPv6 address

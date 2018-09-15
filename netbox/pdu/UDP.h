@@ -74,22 +74,22 @@ inline constexpr UDP::operator bool() const noexcept
 
 inline constexpr std::uint16_t UDP::source() const noexcept
 {
-    return networkToHost16(header_->source);
+    return details::networkToHost16(header_->source);
 }
 
 inline constexpr std::uint16_t UDP::destination() const noexcept
 {
-    return networkToHost16(header_->dest);
+    return details::networkToHost16(header_->dest);
 }
 
 inline constexpr std::uint16_t UDP::length() const noexcept
 {
-    return networkToHost16(header_->len);
+    return details::networkToHost16(header_->len);
 }
 
 inline constexpr std::uint16_t UDP::checksum() const noexcept
 {
-    return networkToHost16(header_->check);
+    return details::networkToHost16(header_->check);
 }
 
 inline constexpr const void* UDP::payload() const noexcept

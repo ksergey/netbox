@@ -9,8 +9,8 @@
 #include <vector>
 #include <utility>
 
-#include <netbox/byte_order.h>
 #include <netbox/debug.h>
+#include <netbox/details/byte_order.h>
 #include <netbox/pcap/Packet.h>
 #include <netbox/utils/FileReader.h>
 
@@ -113,8 +113,8 @@ private:
                 scale_ = PassThrough;
                 break;
 
-            case hostToNetwork32(TCPDumpMagic):
-            case hostToNetwork32(NSecTCPDumpMagic):
+            case details::hostToNetwork32(TCPDumpMagic):
+            case details::hostToNetwork32(NSecTCPDumpMagic):
                 return (file_ = {}), debug("<WARN> Byte swapped PCAP not support");
 
             default:

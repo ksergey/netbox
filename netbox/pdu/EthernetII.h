@@ -12,7 +12,7 @@
 #include <array>
 #include <string>
 
-#include <netbox/byte_order.h>
+#include <netbox/details/byte_order.h>
 #include <netbox/exception.h>
 
 namespace netbox::pdu {
@@ -94,7 +94,7 @@ inline constexpr EthernetII::Address EthernetII::source() const noexcept
 
 inline constexpr auto EthernetII::protocol() const noexcept
 {
-    return networkToHost16(header_->h_proto);
+    return details::networkToHost16(header_->h_proto);
 }
 
 inline constexpr const void* EthernetII::payload() const noexcept

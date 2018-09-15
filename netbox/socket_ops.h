@@ -10,7 +10,7 @@
 #include <netdb.h>
 
 #include <netbox/buffer.h>
-#include <netbox/concepts.h>
+#include <netbox/details/concepts.h>
 #include <netbox/IPv4.h>
 #include <netbox/IPv6.h>
 #include <netbox/result.h>
@@ -28,9 +28,9 @@ NETBOX_FORCE_INLINE OpResult connect(Socket& socket, const sockaddr* addr, sockl
 template< class Endpoint >
 NETBOX_FORCE_INLINE OpResult connect(Socket& socket, const Endpoint& endpoint) noexcept
 {
-    static_assert( std::is_same< DataResultType< const Endpoint >, const sockaddr* >(),
+    static_assert( std::is_same< details::DataResultType< const Endpoint >, const sockaddr* >(),
            "Endpoint not meet requirements" );
-    static_assert( std::is_same< SizeResultType< const Endpoint >, socklen_t >(),
+    static_assert( std::is_same< details::SizeResultType< const Endpoint >, socklen_t >(),
            "Endpoint not meet requirements" );
 
     return connect(socket, endpoint.data(), endpoint.size());
@@ -46,10 +46,11 @@ NETBOX_FORCE_INLINE OpResult bind(Socket& socket, const sockaddr* addr, socklen_
 template< class Endpoint >
 NETBOX_FORCE_INLINE OpResult bind(Socket& socket, const Endpoint& endpoint) noexcept
 {
-    static_assert( std::is_same< DataResultType< const Endpoint >, const sockaddr* >(),
+    static_assert( std::is_same< details::DataResultType< const Endpoint >, const sockaddr* >(),
            "Endpoint not meet requirements" );
-    static_assert( std::is_same< SizeResultType< const Endpoint >, socklen_t >(),
+    static_assert( std::is_same< details::SizeResultType< const Endpoint >, socklen_t >(),
            "Endpoint not meet requirements" );
+
     return bind(socket, endpoint.data(), endpoint.size());
 }
 
@@ -81,11 +82,11 @@ NETBOX_FORCE_INLINE SocketResult accept(Socket& socket, sockaddr* addr = nullptr
 template< class Endpoint >
 NETBOX_FORCE_INLINE SocketResult accept(Socket& socket, Endpoint& endpoint) noexcept
 {
-    static_assert( std::is_same< DataResultType< Endpoint >, sockaddr* >(),
+    static_assert( std::is_same< details::DataResultType< const Endpoint >, const sockaddr* >(),
            "Endpoint not meet requirements" );
-    static_assert( std::is_same< SizeResultType< Endpoint >, socklen_t >(),
+    static_assert( std::is_same< details::SizeResultType< const Endpoint >, socklen_t >(),
            "Endpoint not meet requirements" );
-    static_assert( HasMemberResize< Endpoint >(),
+    static_assert( details::HasMemberResize< Endpoint >(),
            "Endpoint not meet requirements" );
 
     socklen_t len;

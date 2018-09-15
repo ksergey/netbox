@@ -8,7 +8,7 @@
 #include <netinet/in.h>
 #include <type_traits>
 
-namespace netbox {
+namespace netbox::details {
 
 template< class T >
 using DataResultType = decltype(std::declval< T& >().data());
@@ -25,6 +25,6 @@ struct HasMemberResize< T, std::void_t< decltype(std::declval< T& >().resize(std
     : std::true_type
 {};
 
-} /* namespace netbox */
+} // namespace netbox::details
 
 #endif /* KSERGEY_concepts_190318235641 */
